@@ -24,6 +24,7 @@
     <Compile Include="PathingApp.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data_File.csv" />
     <Content Include="main.kv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
