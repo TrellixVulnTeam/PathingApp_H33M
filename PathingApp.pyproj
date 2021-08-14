@@ -24,6 +24,7 @@
     <Compile Include="PathingApp.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Basics.txt" />
     <Content Include="Data_File.csv" />
     <Content Include="main.kv" />
   </ItemGroup>
