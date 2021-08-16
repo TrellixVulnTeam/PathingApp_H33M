@@ -4,7 +4,6 @@ Main:
     Menu:
     FirstScreen:
     SecondScreen:
-    ThirdScreen:
 
 
 
@@ -171,6 +170,8 @@ Main:
 
 <Menu>:
     name: "menu"
+    textInput : textInput
+    fileName : fileName
 
     BoxLayout:
         orientation:'vertical'
@@ -188,30 +189,31 @@ Main:
                 text: 'Home'
                 icon: 'home-outline'
 
-                RelativeLayout:
+                GridLayout:
+                    cols: 2
 
     
-			        MDRoundFlatIconButton:
+			        Button:
 			            icon: "apple"
 			            text: "Learn"
 			            on_press: app.root.current = "one"
-			            theme_text_color: "Custom"
-			            text_color: app.theme_cls.primary_color
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                        background_color: 0.29,0.65,1,1
+                        
 
-			        MDRoundFlatIconButton:
+			        Button:
 			            text: 'Test'
 			            on_press: app.root.current = "two"
 			            icon: "apple"
-			            theme_text_color: "Custom"
-			            text_color: app.theme_cls.primary_color
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+			            background_color: 0.12,0.56,1,1
+                       
+                    Button:
+                        text: ""
+                        background_color: 0.12,0.56,1,1
+
+                    Button:
+                        text: ""
+                        background_color: 0.29,0.65,1,1
             
-		            MDRoundFlatIconButton:
-                        text: "Open manager"
-                        icon: "folder"
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
-                        on_release: app.file_manager_open()
 
     
 
@@ -221,12 +223,13 @@ Main:
                 icon: 'language-cpp'
                     
                 MDGridLayout:
-                    cols: 3
+                    cols: 2
 
                     MDRoundFlatIconButton:
                         id: btn_open
                         text: "Open"
-                        on_press: root.file_manager_open()
+                        on_press: 
+                            root.file_manager_open()
 
             
                     MDRoundFlatIconButton:
@@ -240,28 +243,10 @@ Main:
                         text: "Save As"
                         on_press: root.on_save_as()
 
-                    MDRoundFlatIconButton:
-                        id: btn_copy
-                        text: "Copy"
-                        on_press: root.on_copy()
-
             
                     MDRoundFlatIconButton:
-                        id: btn_cut
-                        text: "Cut"
-                        on_press: root.on_cut()
-
-
-                    MDRoundFlatIconButton:
-                        id: btn_paste
-                        text: "Paste"
-                        on_press: root.on_paste()
-
-            
-                    MDRoundFlatIconButton:
-                        id: btn_delete
-                        text: "Delete"
-                        on_press: root.on_delete()
+                        text: "Clear"
+                        on_press: root.Clear()
 
                 BoxLayout:
                     padding: 20,115
@@ -270,10 +255,16 @@ Main:
                         do_scroll_y: True
                         MDTextField:
                             id: textInput
+                            text: ""
                             multiline: True
                             hint_text: "New Note:"
 
-
+                BoxLayout:
+                    MDTextField:
+                        id: fileName
+                        text: ""
+                        multiline: True
+                        hint_text: "File Name:"
 
             MDBottomNavigationItem:
                 name: 'screen 3'
@@ -331,6 +322,7 @@ Main:
             Rectangle:
                 pos: self.pos
                 size: self.size
+
     RelativeLayout:
         MDCard:
             size_hint: 1,0.8
@@ -340,14 +332,14 @@ Main:
                 do_scroll_x: False
                 do_scroll_y: True
 
-                Label:
+                MDLabel:
+                    id: words
+                    text: root.showtext()
                     halign: 'center'
                     size_hint_y: None
                     height: self.texture_size[1]
                     text_size: self.width, None
                     padding: 10, 10
-                    text:
-                        'really some amazing text\n' * 100
 
         BoxLayout:
             size_hint_y: 0.2
@@ -360,6 +352,9 @@ Main:
 
 <SecondScreen>:
     name: "two"
+    this : this
+    answer : answer
+
     BoxLayout:
 	    orientation: 'vertical'
         canvas:
@@ -368,6 +363,43 @@ Main:
             Rectangle:
                 pos: self.pos
                 size: self.size
+
+    RelativeLayout:
+        MDLabel:
+            id: this
+            text: ""
+            halign:'center'
+            font_size:20
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            color: 1,1,1
+
+        MDRoundFlatIconButton:
+			text: 'Next'
+			on_press: 
+                root.question_get()
+                root.add()
+			icon: "apple"
+			theme_text_color: "Custom"
+			text_color: app.theme_cls.primary_color
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+
+        MDRoundFlatIconButton:
+			text: 'Submit'
+			on_press: 
+                root.check()
+			icon: "apple"
+			theme_text_color: "Custom"
+			text_color: app.theme_cls.primary_color
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+
+        MDTextField:
+            id: answer
+            text: ""
+            hint_text: "answer"
+            halign: "center"
+            hint_text: "New Note:"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+
         BoxLayout:
             size_hint_y: 5
         BoxLayout:
@@ -376,28 +408,6 @@ Main:
             MDRoundFlatIconButton:
                 text: 'Back'
                 on_press: app.root.current = "menu"
-
-			
-
-<ThirdScreen>:
-    name: "three"
-    BoxLayout:
-	    orientation: 'vertical'
-        canvas:
-            Color:
-                rgb: 0.2,0.2,0.2
-            Rectangle:
-                pos: self.pos
-                size: self.size
-
-
-        BoxLayout:
-    	    padding: [20,20,20,20]
-    	    spacing: 15
-            MDRoundFlatIconButton:
-                text: 'Back'
-                on_press: app.root.current = "menu"
-
 
 
 
