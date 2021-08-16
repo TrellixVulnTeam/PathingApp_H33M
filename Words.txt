@@ -1,0 +1,6 @@
+Question,Word
+what year did Dijkstra publish his algorithm ? _________ ,1959
+What is Dijkstra's algorithm ? __  __________  _______  ____________ ,A SHORTEST PATH ALGORITHM
+What does the A* algorithm use that Dijkstra's does not ? _________ ,HEURISTICS
+Which algorithm would be better in a video game A* algorithm or Dijkstra algorithm ?  ________  ________,A* ALGORITHM
+A* algorithm cannot gurantte __  ________  _______ ?, AN OPTIMAL PATH
